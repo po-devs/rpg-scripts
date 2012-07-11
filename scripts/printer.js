@@ -24,17 +24,30 @@ function is_undefined(val) {
 };
 
 User.prototype.print = function(bot, message) {
-    var pokemon = sys.pokemon(bot);
+    if (bot === "blank") {
+        sys.sendMessage(this.id, message);
+        return;
+    }
+    if (bot === "***") {
+        sys.sendMessage(this.id, "*** " + message + " ***");
+        return;
+    }
+
+    var pokemon = sys.pokeNum(bot);
     var color;
 
     if (!is_undefined(pokemon)) {
         color = colors[sys.pokeType1(pokemon)];
     }
 
+    if (bot.startsWithLetter()) {
+        bot = "±" + bot;
+    }
+
     if (is_undefined(color)) {
-        sys.sendMessage(this.id, "±" + bot + ": " + message, this.channel);
+        sys.sendMessage(this.id, bot + ": " + message, this.channel);
     } else {
         sys.sendHtmlMessage(this.id, "<span style='color: " + color + "'><timestamp/>"
-                            + "<b>±" + bot +  ":</b></span> " + message);
+                            + "<b>" + bot +  ":</b></span> " + message);
     }
 };
