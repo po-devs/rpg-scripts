@@ -1,10 +1,9 @@
 /*
 DATA
 */
-
 //pokemon is an array of up to 6 pokemon
-var Team = function (pokemon){
-	this.pokemon=pokemon;
+var Team = function (pokes){
+	this.pokes=pokemon;
 };
 
 //All of the information is stored as numbers
@@ -49,7 +48,9 @@ FUNCTIONS
 This function takes in a team slot number and teamData
 At the end of this function, the user's team at the given slot number will be set to the given teamData
 */
-User.prototype.setTeam = function(teamArray){}
+User.prototype.setTeam = function(team){
+	team.syncToUser(this.id)
+}
 
 
 /*
@@ -58,7 +59,11 @@ This function will return the team array equivilent of the given team slot numbe
 User.prototype.getTeam = function (slot){}
 
 
-Team.prototype.syncToUser=function(id){}
+Team.prototype.syncToUser=function(id){
+	for(var i=0;i<6;i++){
+		this.pokes[i].syncToUser(id,i);
+	}
+}
 
 
 
