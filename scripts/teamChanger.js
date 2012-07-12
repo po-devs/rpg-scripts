@@ -31,19 +31,19 @@ var IVs = function(hp,att,def,spAtt,spDef,speed){
 	this.hp=hp;
 	this.att=att;
 	this.def=def;
-	this.speed=speed;
 	this.spAtt=spAtt;
 	this.spDef=spDef;
+	this.speed=speed;
 };
 
 //EVs are numbers between 0 and 31
-var EVs = function(hp,att,def,speed,spAtt,spDef){
+var EVs = function(hp,att,def,spAtt,spDef,speed){
 	this.hp=hp;
 	this.att=att;
 	this.def=def;
-	this.speed=speed;
 	this.spAtt=spAtt;
 	this.spDef=spDef;
+	this.speed=speed;
 };
 
 /*
