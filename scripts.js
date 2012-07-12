@@ -1,5 +1,5 @@
 function require(file) {
-	return sys.eval(sys.getFileContent(file));
+    return sys["import"](file);
 }
 
 function User(id)
@@ -9,8 +9,9 @@ function User(id)
     this.channel = null;
 }
 
-require ("scripts/printer.js");
-commands = require ("scripts/commands.js");
+require ("utilities.js");
+require ("printer.js");
+commands = require ("commands.js");
 
 SESSION.identifyScriptAs("RPG Script");
 
@@ -31,7 +32,9 @@ function testClearChat() {
 poScripts = ({
 
 afterLogIn : function(source) {
-
+    var user = SESSION.users(source);
+    user.print("Abra", "Type /commands to get a list of commands!");
+    user.print("blank", "");
 }
 ,
 beforeBattleMatchup : function() {
@@ -41,7 +44,7 @@ beforeBattleMatchup : function() {
 beforeChatMessage : function(src, msg, chan) {
     SESSION.users(src).channel = chan;
 
-    if (msg.substr(0, 1) == "/") {
+    if (msg.substr(0, 1) === "/") {
         sys.stopEvent();
         testClearChat();
 
