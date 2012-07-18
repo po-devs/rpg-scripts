@@ -65,7 +65,7 @@ This function will return the Team equivalent of the given 0 team slot of a user
 User.prototype.getTeam = function (){
 	var pokes=[]
 	for(var i=0;i<6;i++){
-		pokes.push(makePokemon(this.id,i);
+		pokes.push(makePokemon(this.id,i));
 	}
 	return new Team(pokes);
 }
@@ -101,7 +101,7 @@ function makeIVs(id,slot){
 			sys.teamPokeDV(id,0,slot,2),
 			sys.teamPokeDV(id,0,slot,3),
 			sys.teamPokeDV(id,0,slot,4),
-			sys.teamPokeDV(id,0,slot,5),
+			sys.teamPokeDV(id,0,slot,5)
 			);
 }
 
@@ -115,7 +115,7 @@ function makeEVs(id,slot){
 			sys.teamPokeEV(id,0,slot,2),
 			sys.teamPokeEV(id,0,slot,3),
 			sys.teamPokeEV(id,0,slot,4),
-			sys.teamPokeEV(id,0,slot,5),
+			sys.teamPokeEV(id,0,slot,5)
 			);
 }
 
@@ -126,8 +126,8 @@ This function will output the moves Array representative of a given user's 0th t
 function makeMovesArray(id,slot){
 	var moves=[];
 	for(var j=0;j<4;j++){
-		moves.push(sys.teamPokeMove(id,0,slot,i);
-	};
+		moves.push(sys.teamPokeMove(id,0,slot,i));
+	}
 	return moves;
 }
 
@@ -150,7 +150,7 @@ EVs.prototype.syncToUser=function(id,slot){
 	var i=0
 	for(stat in this){
 		sys.changeTeamPokeEV(id,0,slot,i,stat);
-		i++
+		i++;
 	}
 }
 

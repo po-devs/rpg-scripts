@@ -11,6 +11,7 @@ function User(id)
 
 require ("utilities.js");
 require ("printer.js");
+require ("teamChanger.js");
 commands = require ("commands.js");
 
 SESSION.identifyScriptAs("RPG Script");
