@@ -26,4 +26,19 @@ commands['help'] = ["get started.", function(params) {
     user.print("Meowth", "This is a RPG server in construction! Nothing to see just yet, be patient ~");
 }];
 
+commands['transfer'] = ["Transfer your team to someone else.", function(params) {
+    var user = params.user;
+
+    if (!params.target) {
+        user.print("Porygon", "You can't transfer your team to " + params.data + ", they don't exist!");
+        return;
+    }
+
+    var target = SESSION.users(params.target);
+    target.setTeam(user.getTeam());
+
+    user.print("Porygon", "You successfully transfered your team to " + target.name() + "!" );
+    target.print("Porygon", user.name() + " transferred their team over to you!");
+}];
+
 ret = ({handleCommand: handleCommand});

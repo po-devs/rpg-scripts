@@ -7,7 +7,7 @@ DATA
 */
 //pokemon is an array of up to 6 pokemon
 var Team = function (pokes){
-	this.pokes=pokemon;
+    this.pokes=pokes;
 };
 
 //All of the information is stored as numbers
@@ -76,7 +76,7 @@ This Function will output the pokemon equivilent for the given user's 0th team a
 */
 function makePokemon(id,slot){
 	return new Pokemon(
-		sys.teamPokeNum(id,0,slot),
+        sys.teamPoke(id,0,slot),
 		sys.teamPokeName(id,0,slot),
 		sys.teamPokeGender(id,0,slot),
 		sys.teamPokeAbility(id,0,slot),
@@ -95,7 +95,7 @@ function makePokemon(id,slot){
 This function will output the IVs representative of a given user's 0th team pokemon at the given slot
 */
 function makeIVs(id,slot){
-	return newIVs(
+    return new IVs(
 			sys.teamPokeDV(id,0,slot,0),
 			sys.teamPokeDV(id,0,slot,1),
 			sys.teamPokeDV(id,0,slot,2),
@@ -109,7 +109,7 @@ function makeIVs(id,slot){
 This function will output the EVs representative of a given user's 0th team pokemon at the given slot
 */
 function makeEVs(id,slot){
-	return newEVs(
+    return new EVs(
 			sys.teamPokeEV(id,0,slot,0),
 			sys.teamPokeEV(id,0,slot,1),
 			sys.teamPokeEV(id,0,slot,2),
@@ -126,13 +126,10 @@ This function will output the moves Array representative of a given user's 0th t
 function makeMovesArray(id,slot){
 	var moves=[];
 	for(var j=0;j<4;j++){
-		moves.push(sys.teamPokeMove(id,0,slot,i));
+        moves.push(sys.teamPokeMove(id,0,slot,j));
 	}
 	return moves;
 }
-
-
-
 
 /*
 syncToUser will sync the given team to the given user id
@@ -186,7 +183,7 @@ Pokemon.prototype.syncToUser=function(id,slot){
 	sys.changePokeItem(id,0,slot,this.item);
 	sys.changePokeLevel(id,0,slot,this.level);
 	this.ivs.syncToUser(id,slot);
-	this.evs.synchToUser(id,slot);
+    this.evs.syncToUser(id,slot);
 	syncMovesToUser(id,slot,this.moves);
 	sys.changePokeNature(id,0,slot,this.nature);
 	sys.changePokeShine(id,0,slot,this.shiny);

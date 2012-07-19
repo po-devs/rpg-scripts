@@ -60,7 +60,7 @@ beforeChatMessage : function(src, msg, chan) {
             command = msg.substr(1).toLowerCase();
         }
 
-        commands.handleCommand(src, command, data, tar);
+        commands.handleCommand(src, command, data, tar, chan);
     }
 }
 
