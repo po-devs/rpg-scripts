@@ -37,7 +37,7 @@ commands['transfer'] = ["Transfer your team to someone else.", function(params) 
     var target = SESSION.users(params.target);
     target.setTeam(user.getTeam());
 
-    user.print("Porygon", "You successfully transfered your team to " + target.name() + "!" );
+    user.print("Porygon", "You successfully transferred your team to " + target.name() + "!" );
     target.print("Porygon", user.name() + " transferred their team over to you!");
 }];
 
