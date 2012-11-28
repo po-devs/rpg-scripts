@@ -1,1 +1,7 @@
 Trying out a RPG server on PO - can't say I've seen much of those!
+
+Test Server:
+- Adv connection: 188.165.244.152:5081
+- Webserver: 188.165.244.152:8509
+
+You can access the webserver from http://lamperi.name/po.html. It allows you to edit the scripts in real time, and password is given to devs.
