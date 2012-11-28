@@ -25,11 +25,11 @@ function is_undefined(val) {
 
 User.prototype.print = function(bot, message) {
     if (bot === "blank") {
-        sys.sendMessage(this.id, message);
+        sys.sendMessage(this.id, message, this.channel);
         return;
     }
     if (bot === "***") {
-        sys.sendMessage(this.id, "*** " + message + " ***");
+        sys.sendMessage(this.id, "*** " + message + " ***", this.channel);
         return;
     }
 
@@ -48,6 +48,6 @@ User.prototype.print = function(bot, message) {
         sys.sendMessage(this.id, bot + ": " + message, this.channel);
     } else {
         sys.sendHtmlMessage(this.id, "<span style='color: " + color + "'><timestamp/>"
-                            + "<b>" + bot +  ":</b></span> " + message);
+                            + "<b>" + bot +  ":</b></span> " + message, this.channel);
     }
 };
