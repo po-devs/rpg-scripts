@@ -72,12 +72,12 @@ pokeinfo.loadEVs = function loadEVs() {
         if (!pokeinfo.effortValues.hasOwnProperty(pokemon)) {
             pokeinfo.effortValues[pokemon] = {};
         }
-        pokeinfo.effortValues[pokemon][0] = line[1];
-        pokeinfo.effortValues[pokemon][1] = line[2];
-        pokeinfo.effortValues[pokemon][2] = line[3];
-        pokeinfo.effortValues[pokemon][3] = line[4];
-        pokeinfo.effortValues[pokemon][4] = line[5];
-        pokeinfo.effortValues[pokemon][5] = line[6];
+        pokeinfo.effortValues[pokemon][0] = line[1]; //hp
+        pokeinfo.effortValues[pokemon][1] = line[2]; //atk
+        pokeinfo.effortValues[pokemon][2] = line[3]; //def
+        pokeinfo.effortValues[pokemon][3] = line[4]; //spatk
+        pokeinfo.effortValues[pokemon][4] = line[5]; //spdef
+        pokeinfo.effortValues[pokemon][5] = line[6]; //speed
     }
 };
 
