@@ -24,5 +24,8 @@ onChoiceSelection: function(player) {
         choice = {"slot": battle.me, "type":"switch", "pokeSlot": cswitch};
     }
     battle.battleCommand(battle.id, choice);
+},
+onBattleEnd : function (res, winner) {
+    battle.close();
 }
 })
