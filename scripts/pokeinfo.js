@@ -102,6 +102,6 @@ pokeinfo.baseEffortValues = function baseEffortValues(num) {
             evs.push(data[x]);
         }
     }
-    return data;
+    return evs;
 };
 ret = pokeinfo;
