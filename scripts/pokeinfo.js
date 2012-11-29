@@ -69,26 +69,20 @@ pokeinfo.loadEVs = function loadEVs() {
     for (var x = 0; x < values.length; x++) {
         var line = values[x].split(',');
         var pokemon = line[0];
-        var hp = line[1],
-            atk = line[2],
-            def = line[3],
-            spatk = line[4],
-            spdef = line[5],
-            speed = line[6];
         if (!pokeinfo.effortValues.hasOwnProperty(pokemon)) {
             pokeinfo.effortValues[pokemon] = {};
         }
-        pokeinfo.effortValues[pokemon][0] = hp;
-        pokeinfo.effortValues[pokemon][1] = atk;
-        pokeinfo.effortValues[pokemon][2] = def;
-        pokeinfo.effortValues[pokemon][3] = spatk;
-        pokeinfo.effortValues[pokemon][4] = spdef;
-        pokeinfo.effortValues[pokemon][5] = speed;
+        pokeinfo.effortValues[pokemon][0] = line[1];
+        pokeinfo.effortValues[pokemon][1] = line[2];
+        pokeinfo.effortValues[pokemon][2] = line[3];
+        pokeinfo.effortValues[pokemon][3] = line[4];
+        pokeinfo.effortValues[pokemon][4] = line[5];
+        pokeinfo.effortValues[pokemon][5] = line[6];
     }
 };
 
 pokeinfo.baseEffortValueStat = function baseEffortValueStat(num, stat) {
-    if (stat < 0 && stat > 5 || isNaN(stat)) {
+    if (stat < 0 || stat > 5 || isNaN(stat)) {
         return "Incorrect Stat";
     }
     if (!pokeinfo.effortValues.hasOwnProperty(num)) {
