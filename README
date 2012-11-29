@@ -5,3 +5,17 @@ Test Server:
 - Webserver: 188.165.244.152:8509
 
 You can access the webserver from http://lamperi.name/po.html. It allows you to edit the scripts in real time, and password is given to devs.
+
+For the record here is the old NB RPG script (https://gist.github.com/4169697). It allowed you to:
+- start with a team of 6 pokemons, the first pokemon being of your choosing (the rarer the pokes, the less likely you'd get it)
+- give you your own OT and Trainer ID, as well as to your pokemon
+- managed exp win/loss and money win/loss against other players deoending on the battle results
+- level up, move learning, and evolve depending on exp
+- happiness change
+- manage your own pokemon boxes
+- buy / sell items with your money, give/take items from your pokemon
+- battle wild pokemons. The script would manage the battle with an approximated damage formula and you can even use healing items or capture the pokemon
+- battle gym leaders and win badges
+- change locations. You can only battle other players in the same location
+
+All that in 2000 lines of scripts and 500 lines of data.
