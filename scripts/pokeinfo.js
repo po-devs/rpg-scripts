@@ -1,5 +1,55 @@
 var pokeinfo = {};
 
+Pokemon.prototype.generate = function (id, level) {
+    this.num = id;
+    this.level = level;
+    this.evs = new EVs(0, 0, 0, 0, 0, 0);
+    this.ivs = new IVs(rand(0, 31), rand(0, 31), rand(0, 31), rand(0, 31), rand(0, 31), rand(0, 31));
+    this.nick = sys.pokemon(id);
+    var ratio = sys.pokeGenders(id);
+    var gender = 0;
+    if (ratio.hasOwnProperty("male") && ratio.hasOwnProperty("female")) {
+        if (ratio.male <= rand(0, 100)) {
+            gender = 1;
+        }
+        else {
+            gender = 2;
+        }
+    }
+    else if (ratio.hasOwnProperty("male") && !ratio.hasOwnProperty("female")) {
+        gender = 1;
+    }
+    else if (!ratio.hasOwnProperty("male") && ratio.hasOwnProperty("female")) {
+        gender = 2;
+    }
+    this.gender = gender;
+    this.nature = rand(0, 24);
+    this.shiny = (0 === rand(0, 8192));
+    var moves = pokeinfo.levelupMoves(id).sort();
+    var movelist = [];
+    var i = moves.length - 1;
+    var j = 0;
+    while (i-- && j < 4) {
+        var line = moves[i].split(' - ');
+        if (line[0].indexOf('_') !== -1) {
+            line[0] = line[0].substring(0, line[0].indexOf('_'));
+        }
+        if (level >= line[0]) {
+            movelist.push(line[1]);
+            j++;
+        }
+    }
+    this.moves = movelist;
+    if (sys.pokeAbility(id, 1) === 0) {
+        this.ability = sys.pokeAbility(id, 0);
+    }
+    else {
+        this.ability = sys.pokeAbility(id, rand(0, 1));
+    }
+    this.happiness = 70; //placeholder for when base happiness data is added
+    this.item = 0;
+};
+
 pokeinfo.loadLevelMoves = function loadLevelMoves() {
     pokeinfo.levelMoves = {};
     pokeinfo.maxOrder = 0;
@@ -104,4 +154,5 @@ pokeinfo.baseEffortValues = function baseEffortValues(num) {
     }
     return evs;
 };
+
 ret = pokeinfo;
