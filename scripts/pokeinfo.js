@@ -9,7 +9,7 @@ Pokemon.prototype.generate = function (id, level) {
     var ratio = sys.pokeGenders(id);
     var gender = 0;
     if (ratio.hasOwnProperty("male") && ratio.hasOwnProperty("female")) {
-        if (ratio.male >= rand(0, 100)) {
+        if (ratio.male >= rand(1, 100)) {
             gender = 1;
         }
         else {
