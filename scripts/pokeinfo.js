@@ -125,7 +125,7 @@ pokeinfo.levelupMoves = function levelupMoves(num) {
             a = a.substring(0, a.indexOf('_'));
         }
         if (b.indexOf('_') !== -1) {
-            d = b.substring(b.indexOf('_') + 1)
+            d = b.substring(b.indexOf('_') + 1);
             b = b.substring(0, b.indexOf('_'));
         }
         if (c !== undefined && d !== undefined) {
