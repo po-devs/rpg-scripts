@@ -33,7 +33,7 @@ Pokemon.prototype.generate = function (id, level) {
         gender = 2;
     }
     this.gender = gender;
-    var moves = pokeinfo.levelupMoves(id).sort();
+    var moves = pokeinfo.levelupMoves(id);
     var movelist = [];
     var i = moves.length - 1;
     var j = 0;
@@ -48,6 +48,12 @@ Pokemon.prototype.generate = function (id, level) {
         }
     }
     this.moves = movelist;
+};
+
+pokeinfo.loadData = function loadData() {
+    pokeinfo.loadLevelMoves();
+    pokeinfo.loadEVs();
+    pokeinfo.loadHappiness();
 };
 
 pokeinfo.loadLevelMoves = function loadLevelMoves() {
@@ -110,7 +116,24 @@ pokeinfo.levelupMoves = function levelupMoves(num) {
             moves.push(x + " - " + data[x]);
         }
     }
-    return moves;
+    var sortMoves = function (a, b) {
+        a = a.substring(0, a.indexOf(" - "));
+        b = b.substring(0, b.indexOf(" - "));
+        var c, d;
+        if (a.indexOf('_') !== -1) {
+            c = a.substring(a.indexOf('_') + 1);
+            a = a.substring(0, a.indexOf('_'));
+        }
+        if (b.indexOf('_') !== -1) {
+            d = b.substring(b.indexOf('_') + 1)
+            b = b.substring(0, b.indexOf('_'));
+        }
+        if (c !== undefined && d !== undefined) {
+            return c - d;
+        }
+        return a - b;
+    };
+    return moves.sort(sortMoves);
 };
 
 pokeinfo.loadEVs = function loadEVs() {
