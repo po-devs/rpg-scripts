@@ -11,7 +11,7 @@ var Team = function (pokes){
 };
 
 //All of the information is stored as numbers
-var Pokemon = function (num,nick,gender,ability,item,level,ivs,evs,moves,nature,shiny,happiness){
+Pokemon = function (num,nick,gender,ability,item,level,ivs,evs,moves,nature,shiny,happiness){
 	this.num=num;
 	this.nick=nick;
 	this.gender=gender;
@@ -27,7 +27,7 @@ var Pokemon = function (num,nick,gender,ability,item,level,ivs,evs,moves,nature,
 };
 
 //IVs are numbers between 0 and 31
-var IVs = function(hp,att,def,spAtt,spDef,speed){
+IVs = function(hp,att,def,spAtt,spDef,speed){
 	this.hp=hp;
 	this.att=att;
 	this.def=def;
@@ -37,7 +37,7 @@ var IVs = function(hp,att,def,spAtt,spDef,speed){
 };
 
 //EVs are numbers between 0 and 31
-var EVs = function(hp,att,def,spAtt,spDef,speed){
+EVs = function(hp,att,def,spAtt,spDef,speed){
 	this.hp=hp;
 	this.att=att;
 	this.def=def;

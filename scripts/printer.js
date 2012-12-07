@@ -20,10 +20,13 @@ var colors = [
 ];
 
 function is_undefined(val) {
-    return typeof(val) === 'undefined' || val === null;
-};
+    return typeof (val) === 'undefined' || val === null;
+}
 
-User.prototype.print = function(bot, message) {
+User.prototype.print = function (bot, message) {
+    if (is_undefined(this.channel)) {
+        this.channel = 0;
+    }
     if (bot === "blank") {
         sys.sendMessage(this.id, message, this.channel);
         return;
@@ -46,8 +49,8 @@ User.prototype.print = function(bot, message) {
 
     if (is_undefined(color)) {
         sys.sendMessage(this.id, bot + ": " + message, this.channel);
-    } else {
-        sys.sendHtmlMessage(this.id, "<span style='color: " + color + "'><timestamp/>"
-                            + "<b>" + bot +  ":</b></span> " + message, this.channel);
+    }
+    else {
+        sys.sendHtmlMessage(this.id, "<span style='color: " + color + "'><timestamp/>" + "<b>" + bot + ":</b></span> " + message, this.channel);
     }
 };

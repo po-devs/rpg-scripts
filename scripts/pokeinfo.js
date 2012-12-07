@@ -1,5 +1,61 @@
 var pokeinfo = {};
 
+Pokemon.prototype.generate = function (id, level) {
+    this.num = id;
+    this.level = level;
+    this.evs = new EVs(0, 0, 0, 0, 0, 0);
+    this.ivs = new IVs(rand(0, 31), rand(0, 31), rand(0, 31), rand(0, 31), rand(0, 31), rand(0, 31));
+    this.nick = sys.pokemon(id);
+    this.happiness = pokeinfo.getBaseHappiness(id);
+    this.item = 0;
+    this.nature = rand(0, 24);
+    this.shiny = (0 === rand(0, 8192));
+    if (sys.pokeAbility(id, 1) === 0) {
+        this.ability = sys.pokeAbility(id, 0);
+    }
+    else {
+        this.ability = sys.pokeAbility(id, rand(0, 1));
+    }
+    var ratio = sys.pokeGenders(id);
+    var gender = 0;
+    if (ratio.hasOwnProperty("male") && ratio.hasOwnProperty("female")) {
+        if (ratio.male >= rand(1, 100)) {
+            gender = 1;
+        }
+        else {
+            gender = 2;
+        }
+    }
+    else if (ratio.hasOwnProperty("male") && !ratio.hasOwnProperty("female")) {
+        gender = 1;
+    }
+    else if (!ratio.hasOwnProperty("male") && ratio.hasOwnProperty("female")) {
+        gender = 2;
+    }
+    this.gender = gender;
+    var moves = pokeinfo.levelupMoves(id);
+    var movelist = [];
+    var i = moves.length;
+    var j = 0;
+    while (i-- && j < 4) {
+        var line = moves[i].split(' - ');
+        if (line[0].indexOf('_') !== -1) {
+            line[0] = line[0].substring(0, line[0].indexOf('_'));
+        }
+        if (level >= line[0]) {
+            movelist.push(line[1]);
+            j++;
+        }
+    }
+    this.moves = movelist;
+};
+
+pokeinfo.loadData = function loadData() {
+    pokeinfo.loadLevelMoves();
+    pokeinfo.loadEVs();
+    pokeinfo.loadHappiness();
+};
+
 pokeinfo.loadLevelMoves = function loadLevelMoves() {
     pokeinfo.levelMoves = {};
     pokeinfo.maxOrder = 0;
@@ -60,7 +116,24 @@ pokeinfo.levelupMoves = function levelupMoves(num) {
             moves.push(x + " - " + data[x]);
         }
     }
-    return moves;
+    var sortMoves = function (a, b) {
+        a = a.substring(0, a.indexOf(" - "));
+        b = b.substring(0, b.indexOf(" - "));
+        var c, d;
+        if (a.indexOf('_') !== -1) {
+            c = a.substring(a.indexOf('_') + 1);
+            a = a.substring(0, a.indexOf('_'));
+        }
+        if (b.indexOf('_') !== -1) {
+            d = b.substring(b.indexOf('_') + 1);
+            b = b.substring(0, b.indexOf('_'));
+        }
+        if (c !== undefined && d !== undefined) {
+            return c - d;
+        }
+        return a - b;
+    };
+    return moves.sort(sortMoves);
 };
 
 pokeinfo.loadEVs = function loadEVs() {
@@ -72,12 +145,7 @@ pokeinfo.loadEVs = function loadEVs() {
         if (!pokeinfo.effortValues.hasOwnProperty(pokemon)) {
             pokeinfo.effortValues[pokemon] = {};
         }
-        pokeinfo.effortValues[pokemon][0] = line[1]; //hp
-        pokeinfo.effortValues[pokemon][1] = line[2]; //atk
-        pokeinfo.effortValues[pokemon][2] = line[3]; //def
-        pokeinfo.effortValues[pokemon][3] = line[4]; //spatk
-        pokeinfo.effortValues[pokemon][4] = line[5]; //spdef
-        pokeinfo.effortValues[pokemon][5] = line[6]; //speed
+        pokeinfo.effortValues[pokemon] = line.slice(1);
     }
 };
 
@@ -104,4 +172,21 @@ pokeinfo.baseEffortValues = function baseEffortValues(num) {
     }
     return evs;
 };
+
+pokeinfo.loadHappiness = function loadHappiness() {
+    pokeinfo.baseHappiness = {};
+    var values = sys.getFileContent('data/pokemon_base_happiness.csv').split('\n');
+    for (var x = 0; x < values.length; x++) {
+        var line = values[x].split(',');
+        pokeinfo.baseHappiness[line[0]] = line[1];
+    }
+};
+
+pokeinfo.getBaseHappiness = function getBaseHappiness(num) {
+    if (!pokeinfo.baseHappiness.hasOwnProperty(num)) {
+        return "Incorrect Pokemon";
+    }
+    return pokeinfo.baseHappiness[num];
+};
+
 ret = pokeinfo;
