@@ -7,12 +7,13 @@ function User(id)
     this.id = id;
     this.team = null;
     this.channel = null;
+    this.phase = null;
 }
 
 require ("utilities.js");
-require ("printer.js");
 require ("teamChanger.js");
 pokeinfo = require ("pokeinfo.js");
+require ("printer.js");
 commands = require ("commands.js");
 
 SESSION.identifyScriptAs("RPG Script");
@@ -46,7 +47,23 @@ beforeBattleMatchup : function() {
 }
 ,
 beforeChatMessage : function(src, msg, chan) {
-    SESSION.users(src).channel = chan;
+    var user = SESSION.users(src);
+    user.channel = chan;
+
+    /* This variable is used to capture user input if they're in the middle of doing something */
+    if (user.phase) {
+        var phase = user.phase;
+        var res = phase(msg);
+
+        if (res) {
+            /* All went well, stopping message */
+            sys.stopEvent();
+            if (user.phase === phase) user.phase = null;
+        } else {
+            /* Something went wrong, doing nothing */
+        }
+        return;
+    }
 
     if (msg.substr(0, 1) === "/") {
         sys.stopEvent();

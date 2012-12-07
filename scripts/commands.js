@@ -41,4 +41,29 @@ commands['transfer'] = ["Transfer your team to someone else.", function(params) 
     target.print("Porygon", user.name() + " transferred their team over to you!");
 }];
 
+commands['generate'] = ["Generate the pokemon specified with random stats.", function(params) {
+    var user = params.user;
+    var pokeid = (sys.pokeNum(params.data) || 0) & 0xFFFF; //Remove forme
+
+    if (pokeid === 0) {
+        user.print("Arceus", "I can't generate a pokemon '"+(params.data||'Missingno')+"'. Please enter a valid pokemon.");
+        return;
+    }
+    user.print("Arceus", "Please enter the level of the " + sys.pokemon(pokeid) + ":");
+    user.phase = function(msg) {
+        var level = Math.floor(+(msg) || 0);
+        if (level < 1 || level > 100) {
+            user.print("Arceus", "Please enter a valid level, between 1 and 100.");
+            /* wrong message, do nothing */
+            return false;
+        }
+        var poke = new Pokemon();
+        poke.generate(pokeid, level);
+        user.print("");
+        poke.print(user);
+        /* good message, remove phase */
+        return true;
+    };
+}];
+
 ret = ({handleCommand: handleCommand});
