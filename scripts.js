@@ -35,9 +35,8 @@ pokeinfo.loadData(); //loads all the data from pokeinfo
 
 poScripts = ({
 
-afterLogIn : function(source, chan) {
+afterLogIn : function(source) {
     var user = SESSION.users(source);
-    user.channel = sys.channelId(chan);
     user.print("Abra", "Type /commands to get a list of commands!");
     user.print("blank", "");
 }

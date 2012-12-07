@@ -35,7 +35,7 @@ Pokemon.prototype.generate = function (id, level) {
     this.gender = gender;
     var moves = pokeinfo.levelupMoves(id);
     var movelist = [];
-    var i = moves.length - 1;
+    var i = moves.length;
     var j = 0;
     while (i-- && j < 4) {
         var line = moves[i].split(' - ');

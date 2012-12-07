@@ -24,6 +24,9 @@ function is_undefined(val) {
 }
 
 User.prototype.print = function (bot, message) {
+    if (is_undefined(this.channel)) {
+        this.channel = 0;
+    }
     if (bot === "blank") {
         sys.sendMessage(this.id, message, this.channel);
         return;
