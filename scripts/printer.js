@@ -24,28 +24,12 @@ function is_undefined(val) {
 }
 
 User.prototype.print = function (bot, message) {
-    var sendMessage = function (id, message, channel) {
-        if (!is_undefined(channel)) {
-            sys.sendMessage(id, message, channel);
-        }
-        else {
-            sys.sendMessage(id, message);
-        }
-    };
-    var sendHtmlMessage = function (id, message, channel) {
-        if (!is_undefined(channel)) {
-            sys.sendHtmlMessage(id, message, channel);
-        }
-        else {
-            sys.sendHtmlMessage(id, message);
-        }
-    };
     if (bot === "blank") {
-        sendMessage(this.id, message, this.channel);
+        sys.sendMessage(this.id, message, this.channel);
         return;
     }
     if (bot === "***") {
-        sendMessage(this.id, "*** " + message + " ***", this.channel);
+        sys.sendMessage(this.id, "*** " + message + " ***", this.channel);
         return;
     }
 
@@ -61,9 +45,9 @@ User.prototype.print = function (bot, message) {
     }
 
     if (is_undefined(color)) {
-        sendMessage(this.id, bot + ": " + message, this.channel);
+        sys.sendMessage(this.id, bot + ": " + message, this.channel);
     }
     else {
-        sendHtmlMessage(this.id, "<span style='color: " + color + "'><timestamp/>" + "<b>" + bot + ":</b></span> " + message, this.channel);
+        sys.sendHtmlMessage(this.id, "<span style='color: " + color + "'><timestamp/>" + "<b>" + bot + ":</b></span> " + message, this.channel);
     }
 };
