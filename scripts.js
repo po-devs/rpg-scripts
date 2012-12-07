@@ -12,6 +12,7 @@ function User(id)
 require ("utilities.js");
 require ("printer.js");
 require ("teamChanger.js");
+pokeinfo = require ("pokeinfo.js");
 commands = require ("commands.js");
 
 SESSION.identifyScriptAs("RPG Script");
@@ -29,6 +30,8 @@ function testClearChat() {
         lastMemUpdate = parseInt(sys.time(), 10);
     }
 }
+
+pokeinfo.loadData(); //loads all the data from pokeinfo
 
 poScripts = ({
 
