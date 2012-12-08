@@ -43,17 +43,17 @@ commands['transfer'] = ["Transfer your team to someone else.", function(params) 
 
 commands['generate'] = ["Generate the pokemon specified with random stats.", function(params) {
     var user = params.user;
-    var pokeid = (sys.pokeNum(params.data) || 0) & 0xFFFF; //Remove forme
+    var data = (params.data||"").split(" ");
+    var pokeid = (sys.pokeNum(data[0]) || 0) & 0xFFFF; //Remove forme
 
     if (pokeid === 0) {
         user.print("Arceus", "I can't generate a pokemon '"+(params.data||'Missingno')+"'. Please enter a valid pokemon.");
         return;
     }
-    user.print("Arceus", "Please enter the level of the " + sys.pokemon(pokeid) + ":");
-    user.phase = function(msg) {
+    var f = function(msg) {
         var level = Math.floor(+(msg) || 0);
         if (level < 1 || level > 100) {
-            user.print("Arceus", "Please enter a valid level, between 1 and 100.");
+            user.print("Arceus", "Please input a valid level, i.e. a number between 1 and 100:");
             /* wrong message, do nothing */
             return false;
         }
@@ -64,6 +64,12 @@ commands['generate'] = ["Generate the pokemon specified with random stats.", fun
         /* good message, remove phase */
         return true;
     };
+    if (data.length > 1) {
+        f(data[1]);
+    } else {
+        user.print("Arceus", "Please input the level of the " + sys.pokemon(pokeid) + ":");
+        user.phase = f;
+    }
 }];
 
 ret = ({handleCommand: handleCommand});
