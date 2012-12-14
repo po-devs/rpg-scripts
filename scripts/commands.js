@@ -107,4 +107,11 @@ commands['start'] = ["Start the RPG! You can specify your starter, too.", functi
     user.print("");
 }];
 
+commands['clear'] = ["Removes all traces of RPG on you! With that you can /start again.", function(params) {
+    var user = params.user;
+
+    user.rpg = null;
+    user.print("Deoxys", "All traces of you in the RPG world have been erased!");
+}];
+
 ret = ({handleCommand: handleCommand});
