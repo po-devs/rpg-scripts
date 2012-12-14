@@ -1,0 +1,88 @@
+#global map here: http://meetingwords.com/SUvXwawW4s
+[General]
+InitialLocation=Del
+
+[Del]
+Type=City
+Available=PokeCenter
+NextLocations=Route 1
+
+[Route 1]
+Type=Route
+NextLocations=Del, Belch
+
+[Belch]
+Type=City
+NextLocations=Route 1, Route 2
+
+[Route 2]
+Type=Route
+NextLocations=Belch, Route 3
+
+[Route 3]
+Type=Route
+NextLocations=Route 2, Donlon
+
+[Donlon]
+Type=City
+Available=PokeCenter, Gym
+PokemartItems=Pokeball, Potion
+NextLocations=Route 3, Route 4
+
+[Route 4]
+Type=Route
+NextLocations=Donlon, Abyss Road
+
+[Abyss Road]
+Type=Tunnel
+NextLocations=Route 4, Route 5
+
+[Route 5]
+Type=Route
+NextLocations=Abyss Route, Kubatoon
+
+[Kubatoon]
+Type=City
+Available=PokeCenter, Gym
+PokemartItems=Pokeball, Potion, Anti-Para
+NextLocations=Route 5, Route 6
+
+[Route 6]
+Type=Route
+NextLocations=Forest, Route 37, Kubatoon
+
+[Blue Forest]
+Type=Forest
+NextLocations=Route 7
+
+[Route 7]
+Type=Route
+NextLocations=Forest, Prettylinda
+
+[Prettylinda]
+Type=City
+Available=PokeCenter, Gym
+PokemartItems=Pokeball, Potion, Anti-Burn
+NextLocations=Route 7, Route 8
+
+[Route 8]
+Type=Route
+NextLocations=Prettylinda, Route 9
+
+[Route 9]
+Type=Route
+NextLocations=Route 8
+
+[Route 37]
+Type=Route
+NextLocations=Route 6, Route 38
+
+[Route 38]
+Type=Route
+NextLocations=Route 37, Reefland
+
+[Reefland]
+Type=City
+Available=PokeCenter, Gym
+PokemartItems=Pokeball, Potion, Anti-Freeze
+NextLocations=Route 38

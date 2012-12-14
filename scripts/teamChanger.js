@@ -6,8 +6,13 @@ NOTE: ALL SYNCING WILL ONLY WORK WITH THE TEAM AT THE 0 SLOT SO FAR
 DATA
 */
 //pokemon is an array of up to 6 pokemon
-var Team = function (pokes){
-    this.pokes=pokes;
+Team = function (pokes){
+    this.pokes = pokes || [new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon()];
+};
+
+Team.prototype.poke = function(i)
+{
+    return this.pokes[i];
 };
 
 //All of the information is stored as numbers
@@ -17,33 +22,66 @@ Pokemon = function (num,nick,gender,ability,item,level,ivs,evs,moves,nature,shin
     this.gender=gender;
     this.ability=ability;
     this.item=item;
-    this.level=level;
-    this.ivs=ivs;
-    this.evs=evs;
-    this.moves=moves;
+    this.level=level||1;
+    this.ivs=ivs||new IVs();
+    this.evs=evs||new EVs();
+    this.moves=moves||[0,0,0,0];
     this.nature=nature;
     this.shiny=shiny;
     this.happiness=happiness;
 };
 
-//IVs are numbers between 0 and 31
-IVs = function(hp,att,def,spAtt,spDef,speed){
-    this.hp=hp;
-    this.att=att;
-    this.def=def;
-    this.spAtt=spAtt;
-    this.spDef=spDef;
-    this.speed=speed;
+Pokemon.prototype.isValid = function()
+{
+    return (this.num || 0) != 0;
 };
 
-//EVs are numbers between 0 and 31
-EVs = function(hp,att,def,spAtt,spDef,speed){
-    this.hp=hp;
-    this.att=att;
-    this.def=def;
-    this.spAtt=spAtt;
-    this.spDef=spDef;
-    this.speed=speed;
+/*
+ syncMovesToUser will sync the given moves to the given pokemon slot of the given user id
+ */
+function syncMovesToUser(id,slot,movesArray){
+    for(var i=0;i<4;i++){
+        sys.changePokeMove(id,0,slot,i,movesArray[i]);
+    }
+}
+
+/*
+ syncToUser will sync the given pokemon to the given user at the given slot
+ */
+Pokemon.prototype.syncToUser=function(id,slot){
+    sys.changePokeNum(id,0,slot,this.num);
+    sys.changePokeName(id,0,slot,this.nick);
+    sys.changePokeGender(id,0,slot,this.gender);
+    sys.changePokeAbility(id,0,slot,this.ability);
+    sys.changePokeItem(id,0,slot,this.item);
+    sys.changePokeLevel(id,0,slot,this.level);
+    this.ivs.syncToUser(id,slot);
+    this.evs.syncToUser(id,slot);
+    syncMovesToUser(id,slot,this.moves);
+    sys.changePokeNature(id,0,slot,this.nature);
+    sys.changePokeShine(id,0,slot,this.shiny);
+    sys.changePokeHappiness(id,0,slot,this.happiness);
+};
+
+Pokemon.prototype.toString = function() {
+    var str = [];
+    var name = sys.pokemon(this.num);
+    var gender = this.gender === 0 ? "" : (this.gender===1?"(M)":"(F)");
+    if (name === this.nick) {
+        str.push(name + " " + gender + " lv. " + this.level + " @ " + sys.item(this.item) + (this.shiny? " [Shiny]" : ""));
+    } else {
+        str.push(this.nick + " ("+ name + ") " + gender + " lv. " + this.level + " @ " + sys.item(this.item) + (this.shiny? " [Shiny]" : ""));
+    }
+
+    str.push("Trait: " + sys.ability(this.ability));
+    str.push(this.evs.toString());
+    str.push(this.ivs.toString());
+    str.push(sys.nature(this.nature)+ " nature, " + this.happiness + " happiness");
+    for (var i =0; i < this.moves.length; i++) {
+        str.push("- " + sys.move(this.moves[i]));
+    }
+
+    return str.clean("").join("\n");
 };
 
 /*
@@ -56,19 +94,19 @@ At the end of this function, the user's team at the 0 slot number will be set to
 */
 User.prototype.setTeam = function(team){
     team.syncToUser(this.id);
-}
+};
 
 
 /*
 This function will return the Team equivalent of the given 0 team slot of a user
 */
 User.prototype.getTeam = function (){
-    var pokes=[]
+    var pokes=[];
     for(var i=0;i<6;i++){
         pokes.push(makePokemon(this.id,i));
     }
     return new Team(pokes);
-}
+};
 
 
 /*
@@ -138,88 +176,28 @@ Team.prototype.syncToUser=function(id){
     for(var i=0;i<6;i++){
         this.pokes[i].syncToUser(id,i);
     }
-}
+};
+
+//EVs are numbers between 0 and 31
+EVs = function(hp,att,def,spAtt,spDef,speed){
+    this.hp=hp;
+    this.att=att;
+    this.def=def;
+    this.spAtt=spAtt;
+    this.spDef=spDef;
+    this.speed=speed;
+};
 
 /*
 syncToUser will sync the given EVs to the given pokemon slot of the given user id
 */
 EVs.prototype.syncToUser=function(id,slot){
-    var i=0
-    for(stat in this){
-        sys.changeTeamPokeEV(id,0,slot,i,stat);
-        i++;
-    }
-}
-
-/*
-syncToUser will sync the given EVs to the given pokemon slot of the given user id
-*/
-IVs.prototype.syncToUser=function(id,slot){
     var i=0;
-    for(stat in this){
-        sys.changeTeamPokeDV(id,0,slot,i,stat);
+    for(var stat in this){
+        sys.changeTeamPokeEV(id,0,slot,i,this[stat]);
         i++;
     }
-}
-
-/*
-syncMovesToUser will sync the given moves to the given pokemon slot of the given user id
-*/
-function syncMovesToUser(id,slot,movesArray){
-    for(var i=0;i<4;i++){
-        sys.changePokeMove(id,0,slot,i,movesArray[i]);
-    }
-}
-
-
-/*
-syncToUser will sync the given pokemon to the given user at the given slot
-*/
-Pokemon.prototype.syncToUser=function(id,slot){
-    sys.changePokeNum(id,0,slot,this.num);
-    sys.changePokeName(id,0,slot,this.nick);
-    sys.changePokeGender(id,0,slot,this.gender);
-    sys.changePokeAbility(id,0,slot,this.ability);
-    sys.changePokeItem(id,0,slot,this.item);
-    sys.changePokeLevel(id,0,slot,this.level);
-    this.ivs.syncToUser(id,slot);
-    this.evs.syncToUser(id,slot);
-    syncMovesToUser(id,slot,this.moves);
-    sys.changePokeNature(id,0,slot,this.nature);
-    sys.changePokeShine(id,0,slot,this.shiny);
-    sys.changePokeHappiness(id,0,slot,this.happiness);
-}
-
-
-
-Pokemon.prototype.toString = function() {
-    var str = [];
-    var name = sys.pokemon(this.num);
-    var gender = this.gender === 0 ? "" : (this.gender===1?"(M)":"(F)");
-    if (name === this.nick) {
-        str.push(name + " " + gender + " lv. " + this.level + " @ " + sys.item(this.item) + (this.shiny? " [Shiny]" : ""));
-    } else {
-        str.push(this.nick + " ("+ name + ") " + gender + " lv. " + this.level + " @ " + sys.item(this.item) + (this.shiny? " [Shiny]" : ""));
-    }
-
-    str.push("Trait: " + sys.ability(this.ability));
-    str.push(this.evs.toString());
-    str.push(this.ivs.toString());
-    str.push(sys.nature(this.nature)+ " nature, " + this.happiness + " happiness");
-    for (var i =0; i < this.moves.length; i++) {
-        str.push("- " + sys.move(this.moves[i]));
-    }
-
-    return str.clean("").join("\n");
-}
-
-IVs.prototype.toString = function() {
-    /* Max IVs */
-    if (this.hp + this.att + this.def + this.spAtt + this.spDef + this.speed === 6*31) {
-        return "";
-    }
-    return "IVs: " + this.hp + " HP / " + this.att + " Atk / " + this.def + " Def / " + this.spAtt + " SAtk / " + this.spDef + " SDef / " + this.speed + " Spd";
-}
+};
 
 EVs.prototype.toString = function() {
     /* No EVs */
@@ -235,4 +213,34 @@ EVs.prototype.toString = function() {
     if (this.speed) array.push(this.hp + " Spd");
 
     return "EVs: " + array.join(" / ");
-}
+};
+
+//IVs are numbers between 0 and 31
+IVs = function(hp,att,def,spAtt,spDef,speed){
+    this.hp=hp;
+    this.att=att;
+    this.def=def;
+    this.spAtt=spAtt;
+    this.spDef=spDef;
+    this.speed=speed;
+};
+
+/*
+syncToUser will sync the given EVs to the given pokemon slot of the given user id
+*/
+IVs.prototype.syncToUser=function(id,slot){
+    var i=0;
+    for(var stat in this){
+        sys.changeTeamPokeDV(id,0,slot,i,this[stat]);
+        i++;
+    }
+};
+
+IVs.prototype.toString = function() {
+    /* Max IVs */
+    if (this.hp + this.att + this.def + this.spAtt + this.spDef + this.speed === 6*31) {
+        return "";
+    }
+    return "IVs: " + this.hp + " HP / " + this.att + " Atk / " + this.def + " Def / " + this.spAtt + " SAtk / " + this.spDef + " SDef / " + this.speed + " Spd";
+};
+

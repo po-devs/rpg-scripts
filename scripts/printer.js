@@ -61,7 +61,14 @@ User.prototype.print = function (bot, message) {
     }
 };
 
-//All of the information is stored as numbers
+Team.prototype.print = function(user) {
+    for (var i = 0; i < this.pokes.length; i++) {
+        if (this.poke(i).isValid()) {
+            this.poke(i).print(user);
+        }
+    }
+};
+
 Pokemon.prototype.print = function (user){
     user.print("");
     sys.sendHtmlMessage(user.id, "<table><tr><td><img src='pokemon:" + this.num+ "' /></td><td><pre>"+this+"</pre></td></tr></table>", user.channel);

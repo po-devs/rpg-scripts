@@ -8,6 +8,7 @@ function User(id)
     this.team = null;
     this.channel = null;
     this.phase = null;
+    this.rpg = null;
 }
 
 require ("utilities.js");
