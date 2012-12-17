@@ -83,6 +83,31 @@ beforeChatMessage : function(src, msg, chan) {
 
         commands.handleCommand(src, command, data, tar, chan);
     }
+},
+
+beforeBattleEnded : function(winner,loser,desc,battleid) {
+    /* Keeps "used" teams, aka teams with HP loss */
+    if (sys.loggedIn(winner)) {
+        var uwinner = SESSION.users(winner);
+        if (uwinner && uwinner.rpg) {
+            sys.setTeamToBattleTeam(winner, 0, battleid);
+            uwinner.rpg.team = uwinner.getTeam();
+        }
+    }
+    if (sys.loggedIn(loser)) {
+        var uloser = SESSION.users(loser);
+        if (uloser && uloser.rpg) {
+            sys.setTeamToBattleTeam(loser, 0, battleid);
+            uloser.rpg.team = uloser.getTeam();
+        }
+    }
+},
+
+afterChangeTeam : function(src) {
+    var user = SESSION.users(src);
+    if (user && user.rpg && user.rpg.team) {
+        user.rpg.team.syncToUser(user.id);
+    }
 }
 
 });
