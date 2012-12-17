@@ -110,7 +110,6 @@ User.prototype.getTeam = function (){
 This Function will output the pokemon equivalent for the given user's 0th team at the given slot
 */
 function makePokemon(id,slot){
-    if (slot === 0) sys.sendAll("HP: " + sys.teamPokeHp(id, 0, slot));
     return new Pokemon( {
         "num":sys.teamPoke(id,0,slot),
         "hp":sys.teamPokeHp(id, 0, slot),
