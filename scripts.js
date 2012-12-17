@@ -88,16 +88,16 @@ beforeChatMessage : function(src, msg, chan) {
 beforeBattleEnded : function(winner,loser,desc,battleid) {
     /* Keeps "used" teams, aka teams with HP loss */
     if (sys.loggedIn(winner)) {
-        sys.setTeamToBattleTeam(winner, 0, battleid);
         var uwinner = SESSION.users(winner);
         if (uwinner && uwinner.rpg) {
+            sys.setTeamToBattleTeam(winner, 0, battleid);
             uwinner.rpg.team = uwinner.getTeam();
         }
     }
     if (sys.loggedIn(loser)) {
-        sys.setTeamToBattleTeam(loser, 0, battleid);
         var uloser = SESSION.users(loser);
         if (uloser && uloser.rpg) {
+            sys.setTeamToBattleTeam(loser, 0, battleid);
             uloser.rpg.team = uloser.getTeam();
         }
     }
