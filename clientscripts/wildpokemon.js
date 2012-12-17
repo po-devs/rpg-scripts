@@ -2,6 +2,10 @@ var poke = function(spot) { return battle.data.team(spot).poke(0);};
 var fpoke = function(spot) { return battle.data.field.poke(spot);};
 var tpoke = function(ind) { return battle.data.team(battle.me).poke(ind);};
 
+if (battle.data.team(battle.me).name != "Wild Pokemon") {
+    throw "not a wild pokemon";
+}
+
 wildpokemon = ({
 onChoiceSelection: function(player) {
     if (player!=battle.me) {
