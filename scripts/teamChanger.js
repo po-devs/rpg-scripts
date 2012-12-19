@@ -16,19 +16,14 @@ Team.prototype.poke = function(i)
 };
 
 //All of the information is stored as numbers
-Pokemon = function (num,nick,gender,ability,item,level,ivs,evs,moves,nature,shiny,happiness){
-    this.num=num;
-    this.nick=nick;
-    this.gender=gender;
-    this.ability=ability;
-    this.item=item;
-    this.level=level||1;
-    this.ivs=ivs||new IVs();
-    this.evs=evs||new EVs();
-    this.moves=moves||[0,0,0,0];
-    this.nature=nature;
-    this.shiny=shiny;
-    this.happiness=happiness;
+Pokemon = function (params){
+    for (var x in params) {
+        this[x] = params[x];
+    }
+    this.ivs = this.ivs||new IVs();
+    this.evs = this.evs||new EVs();
+    this.level = this.level || 1;
+    this.moves = this.moves||[0,0,0,0];
 };
 
 Pokemon.prototype.isValid = function()
@@ -61,6 +56,8 @@ Pokemon.prototype.syncToUser=function(id,slot){
     sys.changePokeNature(id,0,slot,this.nature);
     sys.changePokeShine(id,0,slot,this.shiny);
     sys.changePokeHappiness(id,0,slot,this.happiness);
+    if ("hp" in this) {sys.changePokeHp(id,0,slot,this.hp);}
+    if ("status" in this) {sys.changePokeStatus(id,0,slot,this.status);}
 };
 
 Pokemon.prototype.toString = function() {
@@ -110,23 +107,25 @@ User.prototype.getTeam = function (){
 
 
 /*
-This Function will output the pokemon equivilent for the given user's 0th team at the given slot
+This Function will output the pokemon equivalent for the given user's 0th team at the given slot
 */
 function makePokemon(id,slot){
-    return new Pokemon(
-        sys.teamPoke(id,0,slot),
-        sys.teamPokeName(id,0,slot),
-        sys.teamPokeGender(id,0,slot),
-        sys.teamPokeAbility(id,0,slot),
-        sys.teamPokeItem(id,0,slot),
-        sys.teamPokeLevel(id,0,slot),
-        makeIVs(id,slot),
-        makeEVs(id,slot),
-        makeMovesArray(id,slot),
-        sys.teamPokeNature(id,0,slot),
-        sys.teamPokeShine(id,0,slot),
-        sys.teamPokeHappiness(id,0,slot)
-        );
+    return new Pokemon( {
+        "num":sys.teamPoke(id,0,slot),
+        "hp":sys.teamPokeHp(id, 0, slot),
+        "status":sys.teamPokeStatus(id, 0, slot),
+        "nick":sys.teamPokeName(id,0,slot),
+        "gender":sys.teamPokeGender(id,0,slot),
+        "ability":sys.teamPokeAbility(id,0,slot),
+        "item":sys.teamPokeItem(id,0,slot),
+        "level":sys.teamPokeLevel(id,0,slot),
+        "ivs":makeIVs(id,slot),
+        "evs":makeEVs(id,slot),
+        "moves":makeMovesArray(id,slot),
+        "nature":sys.teamPokeNature(id,0,slot),
+        "shiny":sys.teamPokeShine(id,0,slot),
+        "happiness":sys.teamPokeHappiness(id,0,slot)
+    });
 }
 
 /*

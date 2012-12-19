@@ -107,6 +107,38 @@ commands['start'] = ["Start the RPG! You can specify your starter, too.", functi
     user.print("");
 }];
 
+commands['wild'] = ["Battle a wild pokemon!", function(params) {
+    var user = params.user;
+    if (!user.rpg) {
+        user.print("Professor Tree", "You need to have begun your adventure to battle wild pokemon!");
+        return;
+    }
+
+    var wp = sys.id("Wild Pokemon");
+    if (wp <= 0 || !sys.loggedIn(wp)) {
+        user.print("Professor Tree", "Let the wild pokemon rest a bit! There's none around here, as you can see!");
+        return;
+    }
+
+    /* Generates a pokemon at random to give */
+    var data = (params.data||"").split(" ");
+    var pokeid = (sys.pokeNum(data[0]) || 0) & 0xFFFF; //Remove forme
+    if (!pokeid) {
+        pokeid = sys.rand(1, 650);
+    }
+
+    var team = new Team();
+    team.poke(0).generate(pokeid, 5);
+
+    team.syncToUser(wp);
+
+    user.print("");
+    user.print(sys.pokemon(pokeid), sys.pokemon(pokeid).toUpperCase());
+    user.print("");
+    sys.forceBattle(user.id, wp,0,0,0,0);
+}
+];
+
 commands['clear'] = ["Removes all traces of RPG on you! With that you can /start again.", function(params) {
     var user = params.user;
 
