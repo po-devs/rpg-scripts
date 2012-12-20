@@ -42,7 +42,7 @@ Pokemon.prototype.generate = function (id, level) {
         if (line[0].indexOf('_') !== -1) {
             line[0] = line[0].substring(0, line[0].indexOf('_'));
         }
-        if (level >= line[0]) {
+        if (level >= line[0] && movelist.indexOf(line[1]) === -1) {
             movelist.push(line[1]);
             j++;
         }
