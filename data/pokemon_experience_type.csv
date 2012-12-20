@@ -1,0 +1,650 @@
+id,exp_type
+1,Medium Slow
+2,Medium Slow
+3,Medium Slow
+4,Medium Slow
+5,Medium Slow
+6,Medium Slow
+7,Medium Slow
+8,Medium Slow
+9,Medium Slow
+10,Medium Fast
+11,Medium Fast
+12,Medium Fast
+13,Medium Fast
+14,Medium Fast
+15,Medium Fast
+16,Medium Slow
+17,Medium Slow
+18,Medium Slow
+19,Medium Fast
+20,Medium Fast
+21,Medium Fast
+22,Medium Fast
+23,Medium Fast
+24,Medium Fast
+25,Medium Fast
+26,Medium Fast
+27,Medium Fast
+28,Medium Fast
+29,Medium Slow
+30,Medium Slow
+31,Medium Slow
+32,Medium Slow
+33,Medium Slow
+34,Medium Slow
+35,Fast
+36,Fast
+37,Medium Fast
+38,Medium Fast
+39,Fast
+40,Fast
+41,Medium Fast
+42,Medium Fast
+43,Medium Slow
+44,Medium Slow
+45,Medium Slow
+46,Medium Fast
+47,Medium Fast
+48,Medium Fast
+49,Medium Fast
+50,Medium Fast
+51,Medium Fast
+52,Medium Fast
+53,Medium Fast
+54,Medium Fast
+55,Medium Fast
+56,Medium Fast
+57,Medium Fast
+58,Slow
+59,Slow
+60,Medium Slow
+61,Medium Slow
+62,Medium Slow
+63,Medium Slow
+64,Medium Slow
+65,Medium Slow
+66,Medium Slow
+67,Medium Slow
+68,Medium Slow
+69,Medium Slow
+70,Medium Slow
+71,Medium Slow
+72,Slow
+73,Slow
+74,Medium Slow
+75,Medium Slow
+76,Medium Slow
+77,Medium Fast
+78,Medium Fast
+79,Medium Fast
+80,Medium Fast
+81,Medium Fast
+82,Medium Fast
+83,Medium Fast
+84,Medium Fast
+85,Medium Fast
+86,Medium Fast
+87,Medium Fast
+88,Medium Fast
+89,Medium Fast
+90,Slow
+91,Slow
+92,Medium Slow
+93,Medium Slow
+94,Medium Slow
+95,Medium Fast
+96,Medium Fast
+97,Medium Fast
+98,Medium Fast
+99,Medium Fast
+100,Medium Fast
+101,Medium Fast
+102,Slow
+103,Slow
+104,Medium Fast
+105,Medium Fast
+106,Medium Fast
+107,Medium Fast
+108,Medium Fast
+109,Medium Fast
+110,Medium Fast
+111,Slow
+112,Slow
+113,Fast
+114,Medium Fast
+115,Medium Fast
+116,Medium Fast
+117,Medium Fast
+118,Medium Fast
+119,Medium Fast
+120,Slow
+121,Slow
+122,Medium Fast
+123,Medium Fast
+124,Medium Fast
+125,Medium Fast
+126,Medium Fast
+127,Slow
+128,Slow
+129,Slow
+130,Slow
+131,Slow
+132,Medium Fast
+133,Medium Fast
+134,Medium Fast
+135,Medium Fast
+136,Medium Fast
+137,Medium Fast
+138,Medium Fast
+139,Medium Fast
+140,Medium Fast
+141,Medium Fast
+142,Slow
+143,Slow
+144,Slow
+145,Slow
+146,Slow
+147,Slow
+148,Slow
+149,Slow
+150,Slow
+151,Medium Slow
+152,Medium Slow
+153,Medium Slow
+154,Medium Slow
+155,Medium Slow
+156,Medium Slow
+157,Medium Slow
+158,Medium Slow
+159,Medium Slow
+160,Medium Slow
+161,Medium Fast
+162,Medium Fast
+163,Medium Fast
+164,Medium Fast
+165,Fast
+166,Fast
+167,Fast
+168,Fast
+169,Medium Fast
+170,Slow
+171,Slow
+172,Medium Fast
+173,Fast
+174,Fast
+175,Fast
+176,Fast
+177,Medium Fast
+178,Medium Fast
+179,Medium Slow
+180,Medium Slow
+181,Medium Slow
+182,Medium Slow
+183,Fast
+184,Fast
+185,Medium Fast
+186,Medium Slow
+187,Medium Slow
+188,Medium Slow
+189,Medium Slow
+190,Fast
+191,Medium Slow
+192,Medium Slow
+193,Medium Fast
+194,Medium Fast
+195,Medium Fast
+196,Medium Fast
+197,Medium Fast
+198,Medium Slow
+199,Medium Fast
+200,Fast
+201,Medium Fast
+202,Medium Fast
+203,Medium Fast
+204,Medium Fast
+205,Medium Fast
+206,Medium Fast
+207,Medium Slow
+208,Medium Fast
+209,Fast
+210,Fast
+211,Medium Fast
+212,Medium Fast
+213,Medium Slow
+214,Slow
+215,Medium Slow
+216,Medium Fast
+217,Medium Fast
+218,Medium Fast
+219,Medium Fast
+220,Slow
+221,Slow
+222,Fast
+223,Medium Fast
+224,Medium Fast
+225,Fast
+226,Slow
+227,Slow
+228,Slow
+229,Slow
+230,Medium Fast
+231,Medium Fast
+232,Medium Fast
+233,Medium Fast
+234,Slow
+235,Fast
+236,Medium Fast
+237,Medium Fast
+238,Medium Fast
+239,Medium Fast
+240,Medium Fast
+241,Slow
+242,Fast
+243,Slow
+244,Slow
+245,Slow
+246,Slow
+247,Slow
+248,Slow
+249,Slow
+250,Slow
+251,Medium Slow
+252,Medium Slow
+253,Medium Slow
+254,Medium Slow
+255,Medium Slow
+256,Medium Slow
+257,Medium Slow
+258,Medium Slow
+259,Medium Slow
+260,Medium Slow
+261,Medium Fast
+262,Medium Fast
+263,Medium Fast
+264,Medium Fast
+265,Medium Fast
+266,Medium Fast
+267,Medium Fast
+268,Medium Fast
+269,Medium Fast
+270,Medium Slow
+271,Medium Slow
+272,Medium Slow
+273,Medium Slow
+274,Medium Slow
+275,Medium Slow
+276,Medium Slow
+277,Medium Slow
+278,Medium Fast
+279,Medium Fast
+280,Slow
+281,Slow
+282,Slow
+283,Medium Fast
+284,Medium Fast
+285,Fluctuating
+286,Fluctuating
+287,Slow
+288,Slow
+289,Slow
+290,Erratic
+291,Erratic
+292,Erratic
+293,Medium Slow
+294,Medium Slow
+295,Medium Slow
+296,Fluctuating
+297,Fluctuating
+298,Fast
+299,Medium Fast
+300,Fast
+301,Fast
+302,Medium Slow
+303,Fast
+304,Slow
+305,Slow
+306,Slow
+307,Medium Fast
+308,Medium Fast
+309,Slow
+310,Slow
+311,Medium Fast
+312,Medium Fast
+313,Erratic
+314,Fluctuating
+315,Medium Slow
+316,Fluctuating
+317,Fluctuating
+318,Slow
+319,Slow
+320,Fluctuating
+321,Fluctuating
+322,Medium Fast
+323,Medium Fast
+324,Medium Fast
+325,Fast
+326,Fast
+327,Fast
+328,Medium Slow
+329,Medium Slow
+330,Medium Slow
+331,Medium Slow
+332,Medium Slow
+333,Erratic
+334,Erratic
+335,Erratic
+336,Fluctuating
+337,Fast
+338,Fast
+339,Medium Fast
+340,Medium Fast
+341,Fluctuating
+342,Fluctuating
+343,Medium Fast
+344,Medium Fast
+345,Erratic
+346,Erratic
+347,Erratic
+348,Erratic
+349,Erratic
+350,Erratic
+351,Medium Fast
+352,Medium Slow
+353,Fast
+354,Fast
+355,Fast
+356,Fast
+357,Slow
+358,Fast
+359,Medium Slow
+360,Medium Fast
+361,Medium Fast
+362,Medium Fast
+363,Medium Slow
+364,Medium Slow
+365,Medium Slow
+366,Erratic
+367,Erratic
+368,Erratic
+369,Slow
+370,Fast
+371,Slow
+372,Slow
+373,Slow
+374,Slow
+375,Slow
+376,Slow
+377,Slow
+378,Slow
+379,Slow
+380,Slow
+381,Slow
+382,Slow
+383,Slow
+384,Slow
+385,Slow
+386,Slow
+387,Medium Slow
+388,Medium Slow
+389,Medium Slow
+390,Medium Slow
+391,Medium Slow
+392,Medium Slow
+393,Medium Slow
+394,Medium Slow
+395,Medium Slow
+396,Medium Slow
+397,Medium Slow
+398,Medium Slow
+399,Medium Fast
+400,Medium Fast
+401,Medium Slow
+402,Medium Slow
+403,Medium Slow
+404,Medium Slow
+405,Medium Slow
+406,Medium Slow
+407,Medium Slow
+408,Erratic
+409,Erratic
+410,Erratic
+411,Erratic
+412,Medium Fast
+413,Medium Fast
+414,Medium Fast
+415,Medium Slow
+416,Medium Slow
+417,Medium Fast
+418,Medium Fast
+419,Medium Fast
+420,Medium Fast
+421,Medium Fast
+422,Medium Fast
+423,Medium Fast
+424,Fast
+425,Fluctuating
+426,Fluctuating
+427,Medium Fast
+428,Medium Fast
+429,Fast
+430,Medium Slow
+431,Fast
+432,Fast
+433,Fast
+434,Medium Fast
+435,Medium Fast
+436,Medium Fast
+437,Medium Fast
+438,Medium Fast
+439,Medium Fast
+440,Fast
+441,Medium Slow
+442,Medium Fast
+443,Slow
+444,Slow
+445,Slow
+446,Slow
+447,Medium Slow
+448,Medium Slow
+449,Slow
+450,Slow
+451,Slow
+452,Slow
+453,Medium Fast
+454,Medium Fast
+455,Slow
+456,Erratic
+457,Erratic
+458,Slow
+459,Slow
+460,Slow
+461,Medium Slow
+462,Medium Fast
+463,Medium Fast
+464,Slow
+465,Medium Fast
+466,Medium Fast
+467,Medium Fast
+468,Fast
+469,Medium Fast
+470,Medium Fast
+471,Medium Fast
+472,Medium Slow
+473,Slow
+474,Medium Fast
+475,Slow
+476,Medium Fast
+477,Fast
+478,Medium Fast
+479,Medium Fast
+480,Slow
+481,Slow
+482,Slow
+483,Slow
+484,Slow
+485,Slow
+486,Slow
+487,Slow
+488,Slow
+489,Slow
+490,Slow
+491,Slow
+492,Medium Slow
+493,Slow
+494,Slow
+495,Medium Slow
+496,Medium Slow
+497,Medium Slow
+498,Medium Slow
+499,Medium Slow
+500,Medium Slow
+501,Medium Slow
+502,Medium Slow
+503,Medium Slow
+504,Medium Fast
+505,Medium Fast
+506,Medium Slow
+507,Medium Slow
+508,Medium Slow
+509,Medium Fast
+510,Medium Fast
+511,Medium Fast
+512,Medium Fast
+513,Medium Fast
+514,Medium Fast
+515,Medium Fast
+516,Medium Fast
+517,Fast
+518,Fast
+519,Medium Slow
+520,Medium Slow
+521,Medium Slow
+522,Medium Fast
+523,Medium Fast
+524,Medium Slow
+525,Medium Slow
+526,Medium Slow
+527,Medium Fast
+528,Medium Fast
+529,Medium Fast
+530,Medium Fast
+531,Fast
+532,Medium Slow
+533,Medium Slow
+534,Medium Slow
+535,Medium Slow
+536,Medium Slow
+537,Medium Slow
+538,Medium Fast
+539,Medium Fast
+540,Medium Slow
+541,Medium Slow
+542,Medium Slow
+543,Medium Slow
+544,Medium Slow
+545,Medium Slow
+546,Medium Fast
+547,Medium Fast
+548,Medium Fast
+549,Medium Fast
+550,Medium Fast
+551,Medium Slow
+552,Medium Slow
+553,Medium Slow
+554,Medium Slow
+555,Medium Slow
+556,Medium Fast
+557,Medium Fast
+558,Medium Fast
+559,Medium Fast
+560,Medium Fast
+561,Medium Fast
+562,Medium Fast
+563,Medium Fast
+564,Medium Fast
+565,Medium Fast
+566,Medium Fast
+567,Medium Fast
+568,Medium Fast
+569,Medium Fast
+570,Medium Slow
+571,Medium Slow
+572,Fast
+573,Fast
+574,Medium Slow
+575,Medium Slow
+576,Medium Slow
+577,Medium Slow
+578,Medium Slow
+579,Medium Slow
+580,Medium Fast
+581,Medium Fast
+582,Slow
+583,Slow
+584,Slow
+585,Medium Fast
+586,Medium Fast
+587,Medium Fast
+588,Medium Fast
+589,Medium Fast
+590,Medium Fast
+591,Medium Fast
+592,Medium Fast
+593,Medium Fast
+594,Fast
+595,Medium Fast
+596,Medium Fast
+597,Medium Fast
+598,Medium Fast
+599,Medium Slow
+600,Medium Slow
+601,Medium Slow
+602,Slow
+603,Slow
+604,Slow
+605,Medium Fast
+606,Medium Fast
+607,Medium Slow
+608,Medium Slow
+609,Medium Slow
+610,Slow
+611,Slow
+612,Slow
+613,Medium Fast
+614,Medium Fast
+615,Medium Fast
+616,Medium Fast
+617,Medium Fast
+618,Medium Fast
+619,Medium Slow
+620,Medium Slow
+621,Medium Fast
+622,Medium Fast
+623,Medium Fast
+624,Medium Fast
+625,Medium Fast
+626,Medium Fast
+627,Slow
+628,Slow
+629,Slow
+630,Slow
+631,Medium Fast
+632,Medium Fast
+633,Slow
+634,Slow
+635,Slow
+636,Slow
+637,Slow
+638,Slow
+639,Slow
+640,Slow
+641,Slow
+642,Slow
+643,Slow
+644,Slow
+645,Slow
+646,Slow
+647,Slow
+648,Slow
+649,Slow

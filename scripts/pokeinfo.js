@@ -53,6 +53,7 @@ Pokemon.prototype.generate = function (id, level) {
 pokeinfo.loadData = function loadData() {
     pokeinfo.loadLevelMoves();
     pokeinfo.loadEVs();
+    pokeinfo.loadBaseStats();
     pokeinfo.loadHappiness();
 };
 
@@ -147,6 +148,41 @@ pokeinfo.loadEVs = function loadEVs() {
         }
         pokeinfo.effortValues[pokemon] = line.slice(1);
     }
+};
+
+pokeinfo.loadBaseStats = function loadBaseStats() {
+    var pokelist = sys.getFileContent("db/pokes/stats.txt");
+    var pokes = pokelist.split("\n");
+    var pokedb = {};
+    for (var x in pokes) {
+        var data = pokes[x].split(" ");
+        if (data.length != 7) {
+            continue;
+        }
+        var thepokeid = data[0].split(":");
+        var thepoke = parseInt(thepokeid[0],10) + 65536*parseInt(thepokeid[1],10);
+        pokedb[thepoke] = [parseInt(data[1],10), parseInt(data[2],10), parseInt(data[3],10), parseInt(data[4],10), parseInt(data[5],10), parseInt(data[6],10)];
+    }
+    pokeinfo.baseStats = pokedb;
+};
+
+// Gets base stat
+// To call: pokeinfo.baseStat(pokeid, stat [0-5])
+pokeinfo.baseStat = function baseStat(num, stat) {
+    var retnum = num;
+    if (stat < 0 || stat > 5 || isNaN(stat)) {
+        return "Incorrect Stat";
+    }
+    if (!pokeinfo.baseStats.hasOwnProperty(num)) {
+        // Check for forms
+        if (pokeinfo.baseStats.hasOwnProperty(num%65536)) {
+            retnum = num%65536;
+        }
+        else {
+            return "Incorrect Pokemon";
+        }
+    }
+    return pokeinfo.baseStats[retnum][stat];
 };
 
 pokeinfo.baseEffortValueStat = function baseEffortValueStat(num, stat) {
