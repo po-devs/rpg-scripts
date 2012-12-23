@@ -154,7 +154,7 @@ pokeinfo.loadBaseStats = function loadBaseStats() {
     var pokelist = sys.getFileContent("db/pokes/stats.txt");
     var pokes = pokelist.split("\n");
     var pokedb = {};
-    for (var x in pokes) {
+    for (var x = 0; x < pokes.length; x++) {
         var data = pokes[x].split(" ");
         if (data.length != 7) {
             continue;
