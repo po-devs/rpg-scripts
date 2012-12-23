@@ -55,6 +55,8 @@ pokeinfo.loadData = function loadData() {
     pokeinfo.loadEVs();
     pokeinfo.loadBaseStats();
     pokeinfo.loadHappiness();
+	pokeinfo.loadBaseExperience();
+	pokeinfo.loadExperienceGroups();
 };
 
 pokeinfo.loadLevelMoves = function loadLevelMoves() {
@@ -154,7 +156,7 @@ pokeinfo.loadBaseStats = function loadBaseStats() {
     var pokelist = sys.getFileContent("db/pokes/stats.txt");
     var pokes = pokelist.split("\n");
     var pokedb = {};
-    for (var x in pokes) {
+    for (var x = 0; x < pokes.length; x++) {
         var data = pokes[x].split(" ");
         if (data.length != 7) {
             continue;
@@ -224,5 +226,37 @@ pokeinfo.getBaseHappiness = function getBaseHappiness(num) {
     }
     return pokeinfo.baseHappiness[num];
 };
+
+pokeinfo.loadBaseExperience = function loadBaseExperience() {
+	pokeinfo.baseExperience = {};
+	var values = sys.getFileContent('data/pokemon_base_experience.csv').split('\n');
+	for (var x = 0; x < values.length; x++) {
+		var line = values[x].split(',');
+		pokeinfo.baseExperience[line[0]] = line[1];
+	}
+}
+
+pokeinfo.getBaseExperience = function getBaseExperience(num) {
+    if (!pokeinfo.baseExperience.hasOwnProperty(num)) {
+        return "Incorrect Pokemon";
+    }
+    return pokeinfo.baseExperience[num];
+}
+
+pokeinfo.loadExperienceGroups = function loadExperienceGroups() {
+	pokeinfo.experienceGroups = {};
+	var values = sys.getFileContent('data/pokemon_experience_type.csv').split('\n');
+	for(var x = 0; x < values.length; x++) {
+		var line = values[x].split(',');
+		pokeinfo.experienceGroups[line[0]] = line[1];
+	}
+}
+
+pokeinfo.getExperienceGroup = function getExperienceGroup(num) {
+    if (!pokeinfo.experienceGroups.hasOwnProperty(num)) {
+        return "Incorrect Pokemon";
+    }
+    return pokeinfo.experienceGroups[num];
+}
 
 ret = pokeinfo;
