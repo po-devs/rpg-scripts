@@ -55,6 +55,7 @@ pokeinfo.loadData = function loadData() {
     pokeinfo.loadEVs();
     pokeinfo.loadBaseStats();
     pokeinfo.loadHappiness();
+	pokeinfo.loadBaseExperience();
 };
 
 pokeinfo.loadLevelMoves = function loadLevelMoves() {
@@ -224,5 +225,21 @@ pokeinfo.getBaseHappiness = function getBaseHappiness(num) {
     }
     return pokeinfo.baseHappiness[num];
 };
+
+pokeinfo.loadBaseExperience = function loadBaseExperience() {
+	pokeinfo.baseExperience = {};
+	var values = sys.getFileContent('data/pokemon_base_experience.csv').split('\n');
+	for (var x = 0; x < values.length; x++) {
+		var line = values[x].split(',');
+		pokeinfo.baseExperience[line[0]] = line[1];
+	}
+}
+
+pokeinfo.getBaseExperience = function getBaseExperience(num) {
+    if (!pokeinfo.baseExperience.hasOwnProperty(num)) {
+        return "Incorrect Pokemon";
+    }
+    return pokeinfo.baseExperience[num];
+}
 
 ret = pokeinfo;
