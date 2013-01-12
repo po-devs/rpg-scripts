@@ -96,6 +96,7 @@ commands['start'] = ["Start the RPG! You can specify your starter, too.", functi
 
     user.rpg = {};
     user.rpg.team = team;
+
     team.syncToUser(user.id);
 
     user.print("Professor Tree", "Welcome, young trainer, to the world of pokemon! Pokemon are wonderful things and...");
@@ -142,8 +143,100 @@ commands['wild'] = ["Battle a wild pokemon!", function(params) {
 commands['clear'] = ["Removes all traces of RPG on you! With that you can /start again.", function(params) {
     var user = params.user;
 
+    if (user.rpg === null) {
+        user.print("Deoxys", "You aren't playing an RPG!");
+        return;
+    }
+
     user.rpg = null;
     user.print("Deoxys", "All traces of you in the RPG world have been erased!");
 }];
+
+commands['save'] = ["Saves the game in its current state.", function(params) {
+    var user = params.user;
+
+    if (user.rpg === null) {
+        user.print("Porygon", "You aren't playing an RPG game at the moment!");
+        return;
+    }
+
+    var savename = sys.name(user.id).toLowerCase();
+    if (!sys.dbRegistered(savename)) {
+        user.print("Porygon", "You need to register before saving your game!");
+        return;
+    }
+
+    var savefolder = "rpgsaves";
+
+    // Make the folder if it doesn't exist already
+    sys.makeDir(savefolder);
+    sys.writeToFile(savefolder + "/" + escape(savename) + ".json", JSON.stringify(user.rpg));
+
+    user.print("Porygon", "Your game has been saved! You can use /load to load your game.");
+}];
+
+commands['load'] = ["Loads your previous game.", function(params) {
+    var user = params.user;
+
+    if (user.rpg !== null) {
+        user.print("Porygon", "You are already playing an RPG game!");
+        return;
+    }
+
+    var savename = sys.name(user.id).toLowerCase();
+
+    if (!sys.dbRegistered(savename)) {
+        user.print("Porygon", "You need to register before loading a game!");
+        return;
+    }
+
+    var savefolder = "rpgsaves";
+    var content = sys.getFileContent(savefolder + "/" + escape(savename) + ".json");
+    if (content === undefined) {
+        user.print("Porygon", "You haven't saved a game!");
+        return;
+    }
+
+    try {
+        var gamefile = JSON.parse(content);
+    }
+    catch (err) {
+        user.print("Porygon", "Your game file is corrupted. We apolgise for the inconvenience...");
+        return;
+    }
+
+    // Data needs to be rehashed to provide the full functionality...
+
+    var localdata = gamefile.team.pokes;
+    var newpokes = [];
+
+    for (var x=0; x<6; x++) {
+        if (localdata[x].hasOwnProperty("num")) {
+            var ivvals = localdata[x].ivs;
+            localdata[x].ivs = new IVs(ivvals["hp"],ivvals["att"],ivvals["def"],ivvals["spAtk"],ivvals["spDef"],ivvals["speed"]);
+            var evvals = localdata[x].evs;
+            localdata[x].evs = new EVs(evvals["hp"],evvals["att"],evvals["def"],evvals["spAtk"],evvals["spDef"],evvals["speed"]);
+            newpokes.push(new Pokemon(localdata[x]));
+        }
+        else {
+            newpokes.push(new Pokemon());
+        }
+    }
+
+    var oldteam = new Team(newpokes);
+
+    oldteam.syncToUser(user.id);
+    gamefile.team.pokes = localdata;
+    user.rpg = gamefile;
+    user.print("Porygon", "Your game has been loaded successfully!");
+}];
+
+/*commands['eval'] = ["Evaluation.", function(params) {
+    if (sys.ip(params.user.id) != "127.0.0.1") {
+        return;
+    }
+    var res = sys.eval(params.data);
+    params.user.print("Porygon", res);
+}];*/
 
 ret = ({handleCommand: handleCommand});
