@@ -213,9 +213,9 @@ commands['load'] = ["Loads your previous game.", function(params) {
     for (var x=0; x<6; x++) {
         if (localdata[x].hasOwnProperty("num")) {
             var ivvals = localdata[x].ivs;
-            localdata[x].ivs = new IVs(ivvals["hp"],ivvals["att"],ivvals["def"],ivvals["spAtk"],ivvals["spDef"],ivvals["speed"]);
+            localdata[x].ivs = new IVs(ivvals["hp"],ivvals["att"],ivvals["def"],ivvals["spAtt"],ivvals["spDef"],ivvals["speed"]);
             var evvals = localdata[x].evs;
-            localdata[x].evs = new EVs(evvals["hp"],evvals["att"],evvals["def"],evvals["spAtk"],evvals["spDef"],evvals["speed"]);
+            localdata[x].evs = new EVs(evvals["hp"],evvals["att"],evvals["def"],evvals["spAtt"],evvals["spDef"],evvals["speed"]);
             newpokes.push(new Pokemon(localdata[x]));
         }
         else {
